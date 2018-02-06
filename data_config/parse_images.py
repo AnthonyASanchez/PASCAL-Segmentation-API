@@ -17,7 +17,11 @@ def parse_list(list_dir):
 
 def convert_images(output_dir,list_dir,img_dir, set_name, shape):
     img_list = parse_list(list_dir)
-    for img_name in img_list:
+    percent = 0
+    for index, img_name in enumerate(img_list):
+        if(index % int(len(img_list)/100) == 0):
+            print(percent, "% Complete")
+            percent += 1
         resize_img(output_dir + set_name +"/",img_dir, img_name, shape)
 
 def main():
@@ -28,8 +32,7 @@ def main():
     list_dir = '../VOC2012/ImageSets/Segmentation/'
     img_dir = '../VOC2012/SegmentationClass/'
 
-    if not os.path.exists(output_dir):
-        os.makedirs(output_dir)
+
 
 
     data_files = {
@@ -37,6 +40,8 @@ def main():
         'validation': 'val.txt'
     }
     for name, list_path in data_files.items():
+        if not os.path.exists(output_dir + name):
+            os.makedirs(output_dir + name)
         convert_images(output_dir,list_dir + list_path ,img_dir, name, shape)
 if __name__ == "__main__":
     main()
