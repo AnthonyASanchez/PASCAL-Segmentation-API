@@ -2,6 +2,7 @@ import numpy as np
 import matplotlib.image as mpimg
 import h5py
 from PIL import Image
+import os
 
 #DATASETS
 background = [0.           ,0.          ,0.       ] # 0,
@@ -120,6 +121,12 @@ def main():
     imgs_dir = '../datasets/resized_images/'
     list_dir = '../VOC2012/ImageSets/Segmentation/'
     output_dir = '../datasets/h5_dataset/'
+
+    if not os.path.exists(output_dir):
+        os.makedirs(output_dir)
+    if not os.path.exists(imgs_dir):
+        print("Please resize the images before creating the h5 dataset")
+        os.makedirs(imgs_dir)
 
     data_files = {
         'training': 'train.txt',

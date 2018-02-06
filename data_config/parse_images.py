@@ -1,5 +1,5 @@
 from PIL import Image
-
+import os
 
 
 
@@ -27,6 +27,11 @@ def main():
     output_dir = '../datasets/resized_images/'
     list_dir = '../VOC2012/ImageSets/Segmentation/'
     img_dir = '../VOC2012/SegmentationClass/'
+
+    if not os.path.exists(output_dir):
+        os.makedirs(output_dir)
+
+
     data_files = {
         'training': 'train.txt',
         'validation': 'val.txt'
